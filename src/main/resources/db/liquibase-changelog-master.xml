@@ -4,6 +4,30 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+
+    <changeSet id="create-authors-table" author="rebizant">
+        <createTable tableName="author">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="auth_pk"/>
+            </column>
+            <column name="first_name" type="varchar(100)"/>
+            <column name="last_name" type="varchar(100)"/>
+            <column name="age" type="int"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-articles-table" author="rebizant">
+        <createTable tableName="article">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="aurt_pk"/>
+            </column>
+            <column name="author_id" type="bigint"/>
+            <column name="title" type="varchar(100)"/>
+            <column name="content" type="varchar(100)"/>
+        </createTable>
+    </changeSet>
+
     <changeSet id="add-authors" author="rebizant">
         <loadData tableName="author" file="db/populate-authors.csv">
             <column name="first_name" header="firstName"/>

@@ -2,11 +2,17 @@ micronaut:
   application:
     name: firstMicronaut
 
+database:
+  host: localhost
+  port: 3306
+  username: root
+  password: root
+
 datasources:
   default:
-    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
-    password: root
-    username: root
+    url: jdbc:mysql://${database.host}:${database.port}/test?serverTimezone=UTC
+    password: ${database.username}
+    username: ${database.password}
 
 
 liquibase:
@@ -19,6 +25,4 @@ jpa:
     compile-time-hibernate-proxies: true
     properties:
       hibernate:
-        hbm2ddl:
-          auto: update
         show_sql: true

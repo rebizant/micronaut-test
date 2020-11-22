@@ -5,10 +5,12 @@ import first.micronaut.domain.Author;
 import first.micronaut.repository.ArticleRepository;
 import first.micronaut.repository.AuthorRepository;
 import io.micronaut.context.annotation.Context;
+import io.micronaut.context.annotation.Value;
 import io.micronaut.core.util.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.PostConstruct;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,6 +22,10 @@ public class SampleService {
 
     private final ArticleRepository articleRepository;
     private final AuthorRepository authorRepository;
+    @Value("${database.host}")
+    private String databaseHost;
+    @Value("${database.port}")
+    private String databasePort;
 
     public SampleService(ArticleRepository articleRepository, AuthorRepository authorRepository) {
         this.articleRepository = articleRepository;
@@ -30,8 +36,10 @@ public class SampleService {
         return "sample data";
     }
 
+    @PostConstruct
     public void init() {
-        // log.info("init executed");
+        log.info("database : {}:{}", databaseHost, databasePort);
+
         log.info("all articles quantity : {}", articleRepository.findAll().size());
     }
 
