@@ -1,0 +1,24 @@
+micronaut:
+  application:
+    name: firstMicronaut
+
+datasources:
+  default:
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+    password: root
+    username: root
+
+
+liquibase:
+  datasources:
+    default:
+      change-log: 'classpath:db/liquibase-changelog-master.xml'
+
+jpa:
+  default:
+    compile-time-hibernate-proxies: true
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
